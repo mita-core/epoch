@@ -10,29 +10,29 @@
 </head>
 <body>
 
-<div class="site-header" data-site-header>
-  <header class="nav wrap">
-    <a class="logo" href="#top" aria-label="epoch — home">
-      <span>epoch</span>
-      <svg class="logo__mark" viewBox="0 0 44 22" aria-hidden="true">
-        <rect x="0" y="0" width="21" height="22" rx="10.5"/>
-        <circle cx="33" cy="11" r="11" class="is-ink"/>
-      </svg>
-    </a>
-    <span class="nav__label">Menu</span>
-    <nav class="nav__links" aria-label="Primary">
-      <a href="#top" class="is-active">Home</a>
-      <a href="#why">Why come</a>
-      <a href="#days">The days</a>
-      <a href="#programme">Programme</a>
-    </nav>
-    <a class="nav__contacts" href="#tickets">Tickets</a>
-  </header>
-</div>
-
 <!-- ═══════════ 01 · HERO ═══════════ -->
 <section class="hero" id="top">
   <div class="wrap">
+
+    <div class="nav-slot" data-nav-slot>
+      <header class="nav">
+        <a class="logo" href="#top" aria-label="epoch — home">
+          <span>epoch</span>
+          <svg class="logo__mark" viewBox="0 0 44 22" aria-hidden="true">
+            <rect x="0" y="0" width="21" height="22" rx="10.5"/>
+            <circle cx="33" cy="11" r="11" class="is-ink"/>
+          </svg>
+        </a>
+        <span class="nav__label">Menu</span>
+        <nav class="nav__links" aria-label="Primary">
+          <a href="#top" class="is-active">Home</a>
+          <a href="#why">Why come</a>
+          <a href="#days">The days</a>
+          <a href="#programme">Programme</a>
+        </nav>
+        <a class="nav__contacts" href="#tickets">Tickets</a>
+      </header>
+    </div>
 
     <div class="hero__head">
       <h1 class="hero__title">
@@ -355,8 +355,8 @@
 
 <script>
   (() => {
-    const header = document.querySelector('[data-site-header]');
-    const updateHeader = () => header.classList.toggle('is-stuck', window.scrollY > 0);
+    const navSlot = document.querySelector('[data-nav-slot]');
+    const updateHeader = () => navSlot.classList.toggle('is-stuck', window.scrollY > 24);
 
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
