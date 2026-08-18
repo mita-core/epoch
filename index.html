@@ -10,29 +10,43 @@
 </head>
 <body>
 
+<header class="floating-nav" data-floating-nav aria-hidden="true" inert>
+  <a class="floating-nav__mark" href="#top" aria-label="epoch — home">
+    <svg class="logo__mark" viewBox="0 0 44 22" aria-hidden="true">
+      <rect x="0" y="0" width="21" height="22" rx="10.5"/>
+      <circle cx="33" cy="11" r="11" class="is-ink"/>
+    </svg>
+  </a>
+  <nav class="floating-nav__links" aria-label="Primary">
+    <a href="#top" class="is-active">Home</a>
+    <a href="#why">Why come</a>
+    <a href="#days">The days</a>
+    <a href="#programme">Programme</a>
+  </nav>
+  <a class="floating-nav__tickets" href="#tickets">Tickets</a>
+</header>
+
 <!-- ═══════════ 01 · HERO ═══════════ -->
 <section class="hero" id="top">
   <div class="wrap">
 
-    <div class="nav-slot" data-nav-slot>
-      <header class="nav">
-        <a class="logo" href="#top" aria-label="epoch — home">
-          <span>epoch</span>
-          <svg class="logo__mark" viewBox="0 0 44 22" aria-hidden="true">
-            <rect x="0" y="0" width="21" height="22" rx="10.5"/>
-            <circle cx="33" cy="11" r="11" class="is-ink"/>
-          </svg>
-        </a>
-        <span class="nav__label">Menu</span>
-        <nav class="nav__links" aria-label="Primary">
-          <a href="#top" class="is-active">Home</a>
-          <a href="#why">Why come</a>
-          <a href="#days">The days</a>
-          <a href="#programme">Programme</a>
-        </nav>
-        <a class="nav__contacts" href="#tickets">Tickets</a>
-      </header>
-    </div>
+    <header class="nav">
+      <a class="logo" href="#top" aria-label="epoch — home">
+        <span>epoch</span>
+        <svg class="logo__mark" viewBox="0 0 44 22" aria-hidden="true">
+          <rect x="0" y="0" width="21" height="22" rx="10.5"/>
+          <circle cx="33" cy="11" r="11" class="is-ink"/>
+        </svg>
+      </a>
+      <span class="nav__label">Menu</span>
+      <nav class="nav__links" aria-label="Primary">
+        <a href="#top" class="is-active">Home</a>
+        <a href="#why">Why come</a>
+        <a href="#days">The days</a>
+        <a href="#programme">Programme</a>
+      </nav>
+      <a class="nav__contacts" href="#tickets">Tickets</a>
+    </header>
 
     <div class="hero__head">
       <h1 class="hero__title">
@@ -355,11 +369,19 @@
 
 <script>
   (() => {
-    const navSlot = document.querySelector('[data-nav-slot]');
-    const updateHeader = () => navSlot.classList.toggle('is-stuck', window.scrollY > 24);
+    const floatingNav = document.querySelector('[data-floating-nav]');
+    const updateHeader = () => {
+      const scrollTop = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop);
+      const isVisible = scrollTop > 24;
+
+      floatingNav.classList.toggle('is-visible', isVisible);
+      floatingNav.toggleAttribute('inert', !isVisible);
+      floatingNav.setAttribute('aria-hidden', String(!isVisible));
+    };
 
     updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
+    document.addEventListener('scroll', updateHeader, { passive: true, capture: true });
   })();
 </script>
 
