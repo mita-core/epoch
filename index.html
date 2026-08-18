@@ -6,7 +6,7 @@
 <title>epoch 2026 — three days of AI for people who build</title>
 <meta name="description" content="epoch is a working AI conference for engineers, researchers and product and design leads. November 12–14, 2026, Warehouse 9, Red Hook, Brooklyn. 63 sessions, 40 speakers, tickets from $390.">
 <link rel="stylesheet" href="fonts/inter.css">
-<link rel="stylesheet" href="style.css?v=20260818-8">
+<link rel="stylesheet" href="style.css?v=20260818-9">
 </head>
 <body>
 
@@ -356,24 +356,64 @@
 <script>
   (() => {
     const primaryNav = document.querySelector('[data-primary-nav]');
-    let isCompact = false;
+    const logoWord = primaryNav.querySelector('.logo > span');
+    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const logoWordWidth = logoWord.scrollWidth;
+    let currentProgress = 0;
+    let targetProgress = 0;
     let animationFrame = 0;
+    let previousFrameTime = 0;
 
-    const syncHeader = () => {
-      const scrollTop = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop);
+    const lerp = (start, end, progress) => start + (end - start) * progress;
+    const applyProgress = progress => {
+      const eased = progress * progress * (3 - 2 * progress);
 
-      if (!isCompact && scrollTop > 16) isCompact = true;
-      if (isCompact && scrollTop <= 2) isCompact = false;
+      primaryNav.style.setProperty('--nav-top', `${lerp(34, 28, eased)}px`);
+      primaryNav.style.setProperty('--nav-width', `${lerp(1320, 600, eased)}px`);
+      primaryNav.style.setProperty('--nav-padding-top', `${lerp(0, 10, eased)}px`);
+      primaryNav.style.setProperty('--nav-padding-right', `${lerp(0, 14, eased)}px`);
+      primaryNav.style.setProperty('--nav-padding-bottom', `${lerp(78, 10, eased)}px`);
+      primaryNav.style.setProperty('--nav-padding-left', `${lerp(0, 18, eased)}px`);
+      primaryNav.style.setProperty('--nav-radius', `${lerp(0, 999, eased)}px`);
+      primaryNav.style.setProperty('--logo-gap', `${lerp(10, 0, eased)}px`);
+      primaryNav.style.setProperty('--logo-word-width', `${lerp(logoWordWidth, 0, eased)}px`);
+      primaryNav.style.setProperty('--logo-word-opacity', String(1 - eased));
+      primaryNav.style.setProperty('--logo-word-shift', `${lerp(0, -12, eased)}px`);
+      primaryNav.style.setProperty('--ticket-padding-y', `${lerp(0, 8, eased)}px`);
+      primaryNav.style.setProperty('--ticket-padding-x', `${lerp(0, 18, eased)}px`);
+      primaryNav.style.setProperty('--ticket-radius', `${lerp(0, 999, eased)}px`);
+      primaryNav.style.setProperty('--ticket-background-alpha', String(eased));
+    };
+    const animateHeader = frameTime => {
+      if (prefersReducedMotion) {
+        currentProgress = targetProgress;
+      } else {
+        const deltaTime = previousFrameTime ? Math.min(32, frameTime - previousFrameTime) : 16.67;
+        const follow = 1 - Math.exp(-deltaTime / 260);
+        currentProgress += (targetProgress - currentProgress) * follow;
+        if (Math.abs(targetProgress - currentProgress) < .001) currentProgress = targetProgress;
+      }
+      previousFrameTime = frameTime;
 
-      primaryNav.classList.toggle('is-compact', isCompact);
-      animationFrame = 0;
+      applyProgress(currentProgress);
+
+      if (currentProgress === targetProgress) {
+        animationFrame = 0;
+        previousFrameTime = 0;
+        return;
+      }
+      animationFrame = window.requestAnimationFrame(animateHeader);
     };
     const updateHeader = () => {
+      const scrollTop = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop);
+      targetProgress = Math.min(1, Math.max(0, scrollTop / 160));
+
       if (animationFrame) return;
-      animationFrame = window.requestAnimationFrame(syncHeader);
+      animationFrame = window.requestAnimationFrame(animateHeader);
     };
 
-    syncHeader();
+    applyProgress(0);
+    updateHeader();
     window.addEventListener('scroll', updateHeader, { passive: true });
     document.addEventListener('scroll', updateHeader, { passive: true, capture: true });
   })();
