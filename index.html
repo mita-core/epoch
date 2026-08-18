@@ -6,47 +6,33 @@
 <title>epoch 2026 — three days of AI for people who build</title>
 <meta name="description" content="epoch is a working AI conference for engineers, researchers and product and design leads. November 12–14, 2026, Warehouse 9, Red Hook, Brooklyn. 63 sessions, 40 speakers, tickets from $390.">
 <link rel="stylesheet" href="fonts/inter.css">
-<link rel="stylesheet" href="style.css?v=20260818-5">
+<link rel="stylesheet" href="style.css?v=20260818-6">
 </head>
 <body>
-
-<header class="floating-nav" data-floating-nav aria-hidden="true" inert>
-  <a class="floating-nav__mark" href="#top" aria-label="epoch — home">
-    <svg class="logo__mark" viewBox="0 0 44 22" aria-hidden="true">
-      <rect x="0" y="0" width="21" height="22" rx="10.5"/>
-      <circle cx="33" cy="11" r="11" class="is-ink"/>
-    </svg>
-  </a>
-  <nav class="floating-nav__links" aria-label="Primary">
-    <a href="#top" class="is-active">Home</a>
-    <a href="#why">Why come</a>
-    <a href="#days">The days</a>
-    <a href="#programme">Programme</a>
-  </nav>
-  <a class="floating-nav__tickets" href="#tickets">Tickets</a>
-</header>
 
 <!-- ═══════════ 01 · HERO ═══════════ -->
 <section class="hero" id="top">
   <div class="wrap">
 
-    <header class="nav" data-primary-nav>
-      <a class="logo" href="#top" aria-label="epoch — home">
-        <span>epoch</span>
-        <svg class="logo__mark" viewBox="0 0 44 22" aria-hidden="true">
-          <rect x="0" y="0" width="21" height="22" rx="10.5"/>
-          <circle cx="33" cy="11" r="11" class="is-ink"/>
-        </svg>
-      </a>
-      <span class="nav__label">Menu</span>
-      <nav class="nav__links" aria-label="Primary">
-        <a href="#top" class="is-active">Home</a>
-        <a href="#why">Why come</a>
-        <a href="#days">The days</a>
-        <a href="#programme">Programme</a>
-      </nav>
-      <a class="nav__contacts" href="#tickets">Tickets</a>
-    </header>
+    <div class="nav-slot">
+      <header class="nav" data-primary-nav>
+        <a class="logo" href="#top" aria-label="epoch — home">
+          <span>epoch</span>
+          <svg class="logo__mark" viewBox="0 0 44 22" aria-hidden="true">
+            <rect x="0" y="0" width="21" height="22" rx="10.5"/>
+            <circle cx="33" cy="11" r="11" class="is-ink"/>
+          </svg>
+        </a>
+        <span class="nav__label">Menu</span>
+        <nav class="nav__links" aria-label="Primary">
+          <a href="#top" class="is-active">Home</a>
+          <a href="#why">Why come</a>
+          <a href="#days">The days</a>
+          <a href="#programme">Programme</a>
+        </nav>
+        <a class="nav__contacts" href="#tickets">Tickets</a>
+      </header>
+    </div>
 
     <div class="hero__head">
       <h1 class="hero__title">
@@ -369,16 +355,10 @@
 
 <script>
   (() => {
-    const floatingNav = document.querySelector('[data-floating-nav]');
     const primaryNav = document.querySelector('[data-primary-nav]');
     const updateHeader = () => {
       const scrollTop = Math.max(window.scrollY, document.documentElement.scrollTop, document.body.scrollTop);
-      const isVisible = scrollTop > 0;
-
-      floatingNav.classList.toggle('is-visible', isVisible);
-      primaryNav.classList.toggle('is-scroll-hidden', isVisible);
-      floatingNav.toggleAttribute('inert', !isVisible);
-      floatingNav.setAttribute('aria-hidden', String(!isVisible));
+      primaryNav.classList.toggle('is-compact', scrollTop > 0);
     };
 
     updateHeader();
