@@ -111,7 +111,7 @@ a{color:inherit;text-decoration:none}
   transition:width .25s ease,padding-left .25s ease;
 }
 .floating-nav.is-visible{
-  width:760px;
+  width:600px;
   padding-left:18px;
   visibility:visible;
   pointer-events:auto;
