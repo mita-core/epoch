@@ -139,6 +139,12 @@ a{color:inherit;text-decoration:none}
 
 .nav__label{margin-left:104px}
 
+.nav__links{display:flex;gap:34px;margin-left:96px}
+.nav__links a{padding-bottom:2px;border-bottom:1.5px solid transparent}
+.nav__links a:hover{border-color:var(--ink)}
+.nav__links .is-active{color:var(--acid)}
+.nav__links .is-active:hover{border-color:var(--acid)}
+
 @media (min-width:1024px){
   .nav__label{display:none}
   .nav__links{
@@ -148,12 +154,6 @@ a{color:inherit;text-decoration:none}
     margin-left:0;
   }
 }
-
-.nav__links{display:flex;gap:34px;margin-left:96px}
-.nav__links a{padding-bottom:2px;border-bottom:1.5px solid transparent}
-.nav__links a:hover{border-color:var(--ink)}
-.nav__links .is-active{color:var(--acid)}
-.nav__links .is-active:hover{border-color:var(--acid)}
 
 .nav__contacts{margin-left:auto}
 .nav__contacts:hover{color:var(--acid)}
