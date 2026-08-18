@@ -100,8 +100,8 @@ a{color:inherit;text-decoration:none}
   align-items:center;
   padding:12px 14px 12px 18px;
   border-radius:999px;
-  background:var(--ink);
-  color:var(--cream);
+  background:var(--green);
+  color:var(--ink);
   font-size:14px;
   font-weight:600;
   opacity:0;
@@ -118,7 +118,7 @@ a{color:inherit;text-decoration:none}
   transform:translate(-50%,0) scale(1);
 }
 .floating-nav__mark{display:flex;align-items:center}
-.floating-nav__mark .is-ink{fill:var(--cream)}
+.floating-nav__mark .is-ink{fill:var(--ink)}
 .floating-nav__links{
   position:absolute;
   left:50%;
@@ -127,7 +127,7 @@ a{color:inherit;text-decoration:none}
   transform:translateX(-50%);
 }
 .floating-nav__links a{padding-bottom:2px;border-bottom:1.5px solid transparent}
-.floating-nav__links a:hover{border-color:var(--cream)}
+.floating-nav__links a:hover{border-color:var(--ink)}
 .floating-nav__links .is-active{color:var(--acid)}
 .floating-nav__tickets{
   margin-left:auto;
