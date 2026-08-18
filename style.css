@@ -18,7 +18,7 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 
-html{scroll-behavior:smooth;scroll-padding-top:156px}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
 
 body{
   min-width:1440px;
@@ -70,6 +70,7 @@ a{color:inherit;text-decoration:none}
   position:sticky;
   top:0;
   z-index:100;
+  height:156px;
   background:var(--green);
 }
 
@@ -84,6 +85,7 @@ a{color:inherit;text-decoration:none}
   font-weight:600;
   padding-top:34px;
   padding-bottom:78px;
+  transition:width .25s ease,padding .25s ease,background-color .25s ease,color .25s ease;
 }
 
 .logo{
@@ -100,6 +102,27 @@ a{color:inherit;text-decoration:none}
 
 .site-header.is-stuck .logo > span{display:none}
 .site-header.is-stuck .logo{gap:0}
+.site-header.is-stuck{
+  top:12px;
+  background:transparent;
+  pointer-events:none;
+}
+.site-header.is-stuck .nav{
+  width:760px;
+  padding:12px 14px 12px 18px;
+  border-radius:999px;
+  background:var(--ink);
+  color:var(--cream);
+  pointer-events:auto;
+}
+.site-header.is-stuck .logo__mark .is-ink{fill:var(--cream)}
+.site-header.is-stuck .nav__contacts{
+  padding:8px 18px;
+  border-radius:999px;
+  background:var(--acid);
+  color:var(--ink);
+}
+.site-header.is-stuck .nav__contacts:hover{color:var(--ink)}
 
 .nav__label{margin-left:104px}
 
